@@ -23,8 +23,8 @@ Before you begin, ensure you have the following installed:
 ## ⚙️ Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/your-repo.git
-   cd your-repo
+   git clone https://github.com/Ryaniswalking/Smart-Fridge.git
+   cd Smart-Fridge
    ```
 
 2. Install dependencies for the backend:
