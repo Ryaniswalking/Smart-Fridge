@@ -7,7 +7,8 @@ const getWeatherData = async (latitude, longitude) => {
                 latitude,
                 longitude, 
                 current_weather: true,
-                daily: 'temperature_2m_max,temperature_2m_min',
+                daily: 'temperature_2m_max,temperature_2m_min,windspeed_10m_max',
+                temperature_unit: 'fahrenheit',
                 timezone: 'auto'
             },
         });
