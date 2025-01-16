@@ -1,3 +1,5 @@
+const { getWeatherDescription } = require('../utils/weatherDescription');
+
 class Weather{
     constructor(currentTemp, weatherCode, high, low){
         this.currentTemp = currentTemp;
@@ -13,7 +15,7 @@ function parseWeatherData(rawData){
     }
 
     const currentTemp = rawData.current_weather.temperature;
-    const weatherCode= rawData.current_weather.weathercode;
+    const weatherCode= getWeatherDescription(rawData.current_weather.weathercode);
     const high = rawData.daily.temperature_2m_max[0];
     const low = rawData.daily.temperature_2m_min[0];
 
