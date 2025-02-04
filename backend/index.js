@@ -10,15 +10,15 @@ app.use(express.json());
 
 // Routes
 app.use('/api/weather', weatherRoutes); // Add the weather routes
-app.get('/api', async (req, res) => {
-  try {
-    const result = await getReminders(); // Wait for the promise to resolve      // Logging the result
-    res.json(result[0]);                // Send the rows as a JSON response
-  } catch (err) {
-    console.error('Error fetching reminders:', err);
-    res.status(500).send('Error fetching reminders');
-  }
-});
+// app.get('/api', async (req, res) => {
+//   try {
+//     const result = await getReminders(); // Wait for the promise to resolve      // Logging the result
+//     res.json(result[0]);                // Send the rows as a JSON response
+//   } catch (err) {
+//     console.error('Error fetching reminders:', err);
+//     res.status(500).send('Error fetching reminders');
+//   }
+// });
 
 // Start server
 app.listen(PORT, () => {
