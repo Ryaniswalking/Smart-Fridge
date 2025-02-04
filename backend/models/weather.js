@@ -1,7 +1,8 @@
 const { getWeatherDescription } = require('../utils/weatherDescription');
 
 class Weather{
-    constructor(currentTemp, weatherCode, high, low){
+    constructor(city, currentTemp, weatherCode, high, low){
+        this.city = city;
         this.currentTemp = currentTemp;
         this.weatherCode = weatherCode;
         this.high = high;
@@ -9,7 +10,7 @@ class Weather{
     }
 }
 
-function parseWeatherData(rawData){
+function parseWeatherData(city, rawData){
     if (!rawData || !rawData.current_weather || !rawData.daily) {
         throw new Error("Invalid weather data format");
     }
@@ -19,7 +20,7 @@ function parseWeatherData(rawData){
     const high = rawData.daily.temperature_2m_max[0];
     const low = rawData.daily.temperature_2m_min[0];
 
-    return new Weather(currentTemp, weatherCode, high, low);
+    return new Weather(city, currentTemp, weatherCode, high, low);
 }
 
 module.exports ={
