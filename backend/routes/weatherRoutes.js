@@ -2,34 +2,32 @@ const express = require('express');
 
 const { getCoordinates } = require('../utils/geocoding');
 const { getWeatherData, getCurrentWeather } = require('../utils/weather');
-const { parseWeatherData } = require('../models/currentWeather')
+const { parseWeatherData } = require('../models/weather')
 
 const router = express.Router();
 
-//Route to get weather by input
+//Route to get weather by city
 router.get('/', async (req, res) => {
-    const { input } = req.query;
+    const { city } = req.query;
 
-    if(!input){
+    if(!city){
         return res.status(400).json({
             success: false,
-            message: 'Please provide and input.'
+            message: 'Please provide and city.'
         });
     }
 
     try{
-        const { lat, lon } = await getCoordinates(input);
-        
+        const { lat, lon } = await getCoordinates(city);     
         const weatherData = await getWeatherData(lat, lon);
-
-        const weather = parseWeatherData(weatherData);
+        const weather = parseWeatherData(city, weatherData);
 
         res.status(200).json({
             success: true,
-            input,
+            city,
             coordinates: {lat, lon},
             weather: weather,
-            rawData: weatherData,
+            // rawData: weatherData,
         });
     } catch (error){
         res.status(500).json({
