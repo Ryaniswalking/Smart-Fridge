@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Dashboard from './components/Dashboard'; // Adjust the path based on your structure
+import Dashboard from './components/Dashboard';
 
 function App() {
 
