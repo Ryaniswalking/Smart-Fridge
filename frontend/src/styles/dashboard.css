@@ -1,0 +1,8 @@
+.dashboard {
+    position: relative; /* Ensures child elements with absolute positioning align inside it */
+    width: 1020px;
+    height: 1340px;
+    margin: auto;
+    background-color: #000000;
+  }
+  

@@ -7,9 +7,9 @@ const CurrentWeather = ({ weather }) => {
         <div className="weather-info">
             <h3>{weather.city}</h3>
             <WeatherIcon condition={weather.weatherCode} />
+            <span className="highLowTemp">H: {weather.high}°F L: {weather.low}°F</span>
             <p className="temp">{weather.currentTemp}°F</p>
             <p className="condition">{weather.weatherCode}</p>
-            <p>High: {weather.high}°F | Low: {weather.low}°F</p>
         </div>
     );
 };
