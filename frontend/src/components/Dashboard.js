@@ -1,5 +1,6 @@
 import React from "react";
 import WeatherComponent from "./WeatherComponent";
+import '../styles/dashboard.css';
 
 const Dashboard = () => {
     return (
