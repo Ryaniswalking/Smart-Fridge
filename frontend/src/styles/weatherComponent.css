@@ -1,5 +1,5 @@
 .weather-container {
-  position: absolute;
+  position: relative;
 
   background: 
     linear-gradient(0deg, rgba(132, 132, 139, 0.5), rgba(132, 132, 139, 0.5)),
