@@ -1,5 +1,6 @@
 const express = require('express');
 const weatherRoutes = require('./routes/weatherRoutes');
+const calendarRoutes = require('./routes/calendarRoutes');
 const { getReminders } = require('./queries/queries'); /// Import the connection pool
 
 const app = express();
@@ -10,6 +11,7 @@ app.use(express.json());
 
 // Routes
 app.use('/api/weather', weatherRoutes); // Add the weather routes
+app.use('/api/calendar', calendarRoutes);
 // app.get('/api', async (req, res) => {
 //   try {
 //     const result = await getReminders(); // Wait for the promise to resolve      // Logging the result
