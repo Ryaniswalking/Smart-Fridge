@@ -9,7 +9,6 @@ const CurrentWeather = ({ weather }) => {
             <WeatherIcon condition={weather.weatherCode} />
             <span className="highLowTemp">H: {weather.high}°F L: {weather.low}°F</span>
             <p className="temp">{weather.currentTemp}°F</p>
-            <p className="condition">{weather.weatherCode}</p>
         </div>
     );
 };

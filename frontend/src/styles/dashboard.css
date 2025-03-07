@@ -1,12 +1,19 @@
 .dashboard {
-  display: flex; /* Aligns child components in a row */
-  justify-content: space-between; /* Adds space between elements */
-  align-items: flex-start; /* Aligns items at the top */
+  display: flex;
+  flex-direction: column; /* Stack weather/calendar row on top and reminder section below */
+  justify-content: flex-start; /* Align items to the top */
+  align-items: center; /* Center items horizontally */
   width: 1020px;
-  height: 1340px;
   margin: auto;
-  background-color: #000000;
+  background-color: black;
   padding: 20px;
+}
+
+.top-row {
+  display: flex; /* Align weather and calendar side by side */
+  justify-content: space-between;
+  width: 100%; /* Make it take the full width */
+  margin-bottom: 20px; /* Add space between rows */
 }
 
 .weather-container {
@@ -15,6 +22,12 @@
 }
 
 .calendar-container {
-  flex-grow: 1; /* Allows it to take the remaining space */
+  flex-grow: 1; /* Allow calendar to take the remaining space */
   height: 250px;
+}
+
+.reminder-container {
+  width: 100%; /* Make reminder section take full width */
+  height: auto; /* Allow height to adjust based on content */
+  color: white;
 }
