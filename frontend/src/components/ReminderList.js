@@ -6,8 +6,7 @@ const RemindersList = () => {
     const [reminders, setReminders] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [collapse, setCollapseComplete] = useState(true);
-    const [completedTaskCss, setCompletedTaskCss] = useState("completed-task")
+    const [collapse, setCollapse] = useState(true);
 
     // Fetch reminders from the API
     useEffect(() => {
@@ -48,10 +47,6 @@ const RemindersList = () => {
         );
     };
 
-    const collapseComplete = (active) =>{
-        setCompletedTaskCss(active ? "completed-tasks" : "active");
-        setCollapseComplete(!active)
-    }
     return (
         <div>
             <h2>Reminders</h2>
@@ -70,8 +65,8 @@ const RemindersList = () => {
                         </li>
                     ))}
             </ul>
-            <h3 className="test" onClick={() => collapseComplete(collapse)}>Completed Tasks</h3>
-            <div className={completedTaskCss} >
+            <h3 className="test" onClick={() => setCollapse(!collapse)}>Completed Tasks</h3>
+            <div className={collapse ? "completed-tasks" : "active"} >
                 <ul>
                     {reminders
                         .filter(reminder => reminder.status === 'completed')
