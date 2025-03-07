@@ -66,7 +66,7 @@ const RemindersList = () => {
                     ))}
             </ul>
             <h3 className="test" onClick={() => setCollapse(!collapse)}>Completed Tasks</h3>
-            <div className={collapse ? "completed-tasks" : "active"} >
+            <div className={collapse ? "completed-tasks" : "completed-tasks active"} >
                 <ul>
                     {reminders
                         .filter(reminder => reminder.status === 'completed')

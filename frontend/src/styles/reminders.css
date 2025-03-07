@@ -90,13 +90,16 @@ input:focus{
 
 .completed-tasks {
     padding: 0 18px;
-    display: none;
+    display: block; 
     overflow: hidden;
-    cursor: pointer;
-}
-.active{
+    max-height: 0px;
     transition: max-height 0.5s ease-in-out;
 }
+
+.completed-tasks.active {
+    max-height: 300px;
+}
+
 .test{
     cursor: pointer;
 }
