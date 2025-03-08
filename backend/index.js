@@ -1,7 +1,7 @@
 const express = require('express');
 const weatherRoutes = require('./routes/weatherRoutes');
 const calendarRoutes = require('./routes/calendarRoutes');
-const { getReminders } = require('./queries/queries'); /// Import the connection pool
+const reminderRoutes = require('./routes/reminderRoutes')
 
 const app = express();
 const PORT = 2080;
@@ -12,15 +12,7 @@ app.use(express.json());
 // Routes
 app.use('/api/weather', weatherRoutes); // Add the weather routes
 app.use('/api/calendar', calendarRoutes);
-app.get('/api/reminders', async (req, res) => {
-  try {
-    const result = await getReminders(); // Wait for the promise to resolve      // Logging the result
-    res.json(result);                // Send the rows as a JSON response
-  } catch (err) {
-    console.error('Error fetching reminders:', err);
-    res.status(500).send('Error fetching reminders');
-  }
-});
+app.use('/api/reminders', reminderRoutes);
 
 // Start server
 app.listen(PORT, () => {
