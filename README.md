@@ -1,7 +1,6 @@
 
 # React + Node.js + Express Project
 
-This project is a full-stack template with a React frontend and a Node.js + Express backend. Use this as a starting point for your projects.
 
 ---
 
