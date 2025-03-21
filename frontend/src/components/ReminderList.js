@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/reminders.css';
 import Reminder from './Reminder';
+import NewReminder from './NewReminder';
 
 const RemindersList = () => {
     const [reminders, setReminders] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [collapse, setCollapse] = useState(true);
+    const [showNewReminder, setShowNewReminder] = useState(false);
 
     // Fetch reminders from the API
     useEffect(() => {
@@ -17,7 +19,6 @@ const RemindersList = () => {
                     throw new Error('Failed to fetch reminders');
                 }
                 const data = await response.json();
-                console.log(data)
                 setReminders(data);
             } catch (error) {
                 setError(error.message);
@@ -27,7 +28,7 @@ const RemindersList = () => {
         };
 
         fetchReminders();
-    }, []);
+    }, [showNewReminder]);
 
     if (loading) {
         return <div>Loading reminders...</div>;
@@ -40,31 +41,67 @@ const RemindersList = () => {
     const handleComplete = (reminderId) => {
         setReminders(prevReminders =>
             prevReminders.map(reminder =>
-                reminder.reminder_id === reminderId
+                reminder.reminderId === reminderId
                     ? { ...reminder, status: 'completed' }
                     : reminder
             )
         );
     };
 
+    const newReminder = () => {
+        setShowNewReminder(!showNewReminder)
+    }
+
+    const onClose = () =>{
+        setShowNewReminder(!showNewReminder)
+    }
+
+    const onSubmit = async (reminder) => {
+        try{
+            console.log("Stringify: ", JSON.stringify(reminder));
+            const response = await fetch('/api/reminders/add-reminder', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(reminder),
+            });
+            console.log(response.ok);
+            setShowNewReminder(false)
+        } catch (err) {
+            console.error(err.message);
+        }
+
+    }
+
     return (
         <div>
-            <h2>Reminders</h2>
-            <ul>
-                {reminders
-                    .filter(reminder => reminder.status !== 'completed')
-                    .map(reminder => (
-                        <li
-                            key={reminder.reminder_id}
-                            className={reminder.status === 'completed' ? 'completed' : ''}
-                        >
-                            <Reminder
-                                reminder={reminder}
-                                handleComplete={handleComplete}
-                            />
-                        </li>
-                    ))}
-            </ul>
+            <div>
+                <h2>Reminders <span className='add-reminder' onClick={newReminder}>+</span></h2>
+            </div>
+            {showNewReminder && (
+                <NewReminder 
+                    onClose = {onClose}
+                    onSubmit = {onSubmit}
+                />
+            )}
+            <div className="tasks">
+                <ul>
+                    {reminders
+                        .filter(reminder => reminder.status !== 'completed')
+                        .map(reminder => (
+                            <li
+                                key={reminder.reminderId}
+                                className={reminder.status === 'completed' ? 'completed' : ''}
+                            >
+                                <Reminder
+                                    reminder={reminder}
+                                    handleComplete={handleComplete}
+                                />
+                            </li>
+                        ))}
+                </ul>
+            </div>
             <h3 className="test" onClick={() => setCollapse(!collapse)}>Completed Tasks</h3>
             <div className={collapse ? "completed-tasks" : "completed-tasks active"} >
                 <ul>
@@ -72,7 +109,7 @@ const RemindersList = () => {
                         .filter(reminder => reminder.status === 'completed')
                         .map(reminder => (
                             <li
-                                key={reminder.reminder_id}
+                                key={reminder.reminderId}
                                 className={reminder.status === 'completed' ? 'completed' : ''}
                             >
                                 <Reminder
