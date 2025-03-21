@@ -9,18 +9,19 @@ function Reminder({ reminder, handleComplete }) {
             </div>
             <div>{reminder.description}</div>
             <div>
-                <em>{new Date(reminder.reminder_time).toLocaleString()}</em>
+                <em>{new Date(reminder.reminderTime).toLocaleString()}</em>
             </div>
             <div>Status: {reminder.status}</div>
-            {reminder.is_recurring && (
+            <div>CreateBy: {reminder.createdBy}</div>
+            {reminder.isRecurring && (
                 <div>
                     Recurring: {reminder.frequency} until{' '}
-                    {new Date(reminder.recurrence_end).toLocaleDateString()}
+                    {new Date(reminder.recurrenceEnd).toLocaleDateString()}
                 </div>
             )}
             {reminder.status !== 'completed' && (
                 <button
-                    onClick={() => handleComplete(reminder.reminder_id)}
+                    onClick={() => handleComplete(reminder.reminderId)}
                     className="complete-button"
                 >
                     Complete

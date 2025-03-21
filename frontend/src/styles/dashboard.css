@@ -4,6 +4,7 @@
   justify-content: flex-start; /* Align items to the top */
   align-items: center; /* Center items horizontally */
   width: 1020px;
+  height: 1000px;
   margin: auto;
   background-color: black;
   padding: 20px;
@@ -28,6 +29,7 @@
 
 .reminder-container {
   width: 100%; /* Make reminder section take full width */
-  height: auto; /* Allow height to adjust based on content */
+  height: 600px; /* Allow height to adjust based on content */
   color: white;
+  overflow-y: scroll;
 }

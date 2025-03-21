@@ -19,7 +19,7 @@ li{
     height: auto;
     color: #666;
     padding: 10px;
-    margin-bottom: 10px;
+    margin: 10px 0 10px 0;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -100,6 +100,36 @@ input:focus{
     max-height: 300px;
 }
 
+.add-reminder{
+    cursor: pointer;
+    float: right;
+}
 .test{
     cursor: pointer;
+}
+
+.new-reminder{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rbga(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.new-reminder-inner{
+    position: relative;
+    padding: 32px;
+    width: 100%;
+    max-width: 640px;
+    background-color: black;
+}
+
+.new-reminder .close-btn{
+    position: absolute;
+    top: 16px;
+    right: 16px;
 }
