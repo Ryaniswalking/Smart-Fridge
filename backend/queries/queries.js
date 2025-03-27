@@ -3,7 +3,9 @@ const pool = require('../config/db'); // Import the database pool
 // Function to fetch all reminders
 const getReminders = async () => {
   try {
-    const result = await pool.query('SELECT * FROM reminders');
+    const result = await pool.query(
+      'SELECT * FROM reminders order by reminder_time asc'
+      );
     return result.rows; // Return rows from the result
   } catch (err) {
     console.error('Error fetching reminders:', err.message);
