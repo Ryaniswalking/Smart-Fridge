@@ -21,7 +21,7 @@ function Reminder({ reminder, handleComplete }) {
             )}
             {reminder.status !== 'completed' && (
                 <button
-                    onClick={() => handleComplete(reminder.reminderId)}
+                    onClick={() => handleComplete(reminder)}
                     className="complete-button"
                 >
                     Complete
