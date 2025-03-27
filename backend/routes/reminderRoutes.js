@@ -26,11 +26,12 @@ router.post("/add-reminder", async (req, res) => {
 })
 
 router.put("/update-reminder", async (req, res) => {
-    try{
+    try {
         await updateReminder(req.body);
-        res.status(200)
+        res.status(201).json({ message: "Reminder updated successfully" });
     } catch (err) {
-        res.status(500).status("Failed to update reminder");
+        console.error("Error updating reminder:", err); // Log the error for debugging
+        res.status(500).json({ error: "Failed to update reminder" });
     }
 
 })
