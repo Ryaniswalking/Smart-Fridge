@@ -38,14 +38,39 @@ const RemindersList = () => {
         return <div>Error: {error}</div>;
     }
 
-    const handleComplete = (reminderId) => {
-        setReminders(prevReminders =>
-            prevReminders.map(reminder =>
-                reminder.reminderId === reminderId
-                    ? { ...reminder, status: 'completed' }
-                    : reminder
-            )
-        );
+    const handleComplete = async (reminder) => {
+        try{
+            const completedReminder = {
+                ...reminder,
+                status: 'completed', 
+                completedAt: new Date().toISOString()
+            }
+    
+            const response = await fetch('/api/reminders/update-reminder', {
+                method: "PUT",
+                headers:{
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(completedReminder)
+            })
+    
+            console.log("Response", response);
+            if(response.ok){
+                setReminders(prevReminders =>
+                    prevReminders.map(rem =>
+                        rem.reminderId === reminder.reminderId
+                            ? { ...rem, status: 'completed' }
+                            : rem
+                    )
+                );
+            }else{
+                console.log("NAS QUEEN");
+            }
+        } catch (err) {
+            console.log(err)
+        }
+
+
     };
 
     const newReminder = () => {
@@ -58,7 +83,6 @@ const RemindersList = () => {
 
     const onSubmit = async (reminder) => {
         try{
-            console.log("Stringify: ", JSON.stringify(reminder));
             const response = await fetch('/api/reminders/add-reminder', {
                 method: "POST",
                 headers: {
