@@ -9,26 +9,25 @@ const RemindersList = () => {
     const [error, setError] = useState(null);
     const [collapse, setCollapse] = useState(true);
     const [showNewReminder, setShowNewReminder] = useState(false);
-
+    
+    const fetchReminders = async () => {
+        try {
+            const response = await fetch('/api/reminders');
+            if (!response.ok) {
+                throw new Error('Failed to fetch reminders');
+            }
+            const data = await response.json();
+            setReminders(data);
+        } catch (error) {
+            setError(error.message);
+        } finally {
+            setLoading(false);
+        }
+    };
     // Fetch reminders from the API
     useEffect(() => {
-        const fetchReminders = async () => {
-            try {
-                const response = await fetch('/api/reminders');
-                if (!response.ok) {
-                    throw new Error('Failed to fetch reminders');
-                }
-                const data = await response.json();
-                setReminders(data);
-            } catch (error) {
-                setError(error.message);
-            } finally {
-                setLoading(false);
-            }
-        };
-
         fetchReminders();
-    }, [showNewReminder]);
+    }, [reminders]);
 
     if (loading) {
         return <div>Loading reminders...</div>;
@@ -43,7 +42,7 @@ const RemindersList = () => {
             const completedReminder = {
                 ...reminder,
                 status: 'completed', 
-                completedAt: new Date().toISOString()
+                completedAt: new Date().toLocaleString()
             }
     
             const response = await fetch('/api/reminders/update-reminder', {
@@ -53,24 +52,14 @@ const RemindersList = () => {
                 },
                 body: JSON.stringify(completedReminder)
             })
-    
-            console.log("Response", response);
+
             if(response.ok){
-                setReminders(prevReminders =>
-                    prevReminders.map(rem =>
-                        rem.reminderId === reminder.reminderId
-                            ? { ...rem, status: 'completed' }
-                            : rem
-                    )
-                );
-            }else{
-                console.log("NAS QUEEN");
+                fetchReminders();
             }
+        
         } catch (err) {
             console.log(err)
         }
-
-
     };
 
     const newReminder = () => {
@@ -126,7 +115,7 @@ const RemindersList = () => {
                         ))}
                 </ul>
             </div>
-            <h3 className="test" onClick={() => setCollapse(!collapse)}>Completed Tasks</h3>
+            <h3 className="completed-task-header" onClick={() => setCollapse(!collapse)}>Completed Tasks</h3>
             <div className={collapse ? "completed-tasks" : "completed-tasks active"} >
                 <ul>
                     {reminders
