@@ -36,4 +36,26 @@ const saveReminder = async (reminder) => {
   }
 };
 
-module.exports = { getReminders, saveReminder };
+const updateReminder = async (reminder) => {
+  try {
+    const query = `
+      UPDATE reminders
+      SET status = $1, completed_at = $2
+      where reminder_id = $3
+      RETURNING *;
+    `
+    const values = [reminder.status, reminder.completedAt, reminder.reminderId]
+    const result = await pool.query(query, values);
+
+    if(result.rowCount === 0){
+      throw new Error('Reminder Not Found');
+    }
+
+    return result.rows[0];
+  } catch (err) {
+    console.log(err);
+    throw err
+  }
+}
+
+module.exports = { getReminders, saveReminder, updateReminder };
