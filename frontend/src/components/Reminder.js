@@ -11,8 +11,7 @@ function Reminder({ reminder, handleComplete }) {
             <div>
                 <em>{new Date(reminder.reminderTime).toLocaleString()}</em>
             </div>
-            <div>Status: {reminder.status}</div>
-            <div>CreateBy: {reminder.createdBy}</div>
+            <div>Created By: {reminder.createdBy}</div>
             {reminder.isRecurring && (
                 <div>
                     Recurring: {reminder.frequency} until{' '}
