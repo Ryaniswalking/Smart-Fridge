@@ -3,7 +3,9 @@ const pool = require('../config/db'); // Import the database pool
 // Function to fetch all reminders
 const getReminders = async () => {
   try {
-    const result = await pool.query('SELECT * FROM reminders');
+    const result = await pool.query(
+      'SELECT * FROM reminders order by reminder_time asc'
+      );
     return result.rows; // Return rows from the result
   } catch (err) {
     console.error('Error fetching reminders:', err.message);
@@ -36,4 +38,26 @@ const saveReminder = async (reminder) => {
   }
 };
 
-module.exports = { getReminders, saveReminder };
+const updateReminder = async (reminder) => {
+  try {
+    const query = `
+      UPDATE reminders
+      SET status = $1, completed_at = $2
+      where reminder_id = $3
+      RETURNING *;
+    `
+    const values = [reminder.status, reminder.completedAt, reminder.reminderId]
+    const result = await pool.query(query, values);
+
+    if(result.rowCount === 0){
+      throw new Error('Reminder Not Found');
+    }
+
+    return result.rows[0];
+  } catch (err) {
+    console.log(err);
+    throw err
+  }
+}
+
+module.exports = { getReminders, saveReminder, updateReminder };

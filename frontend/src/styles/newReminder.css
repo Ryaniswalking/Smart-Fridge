@@ -1,0 +1,107 @@
+:root {
+    --primary-color: #2980b9;
+    --input-border: #ccc;
+    --text-color: #333;
+    --bg-overlay: rgba(0, 0, 0, 0.5);
+    --border-radius: 12px;
+    --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    --spacing: 16px;
+    --font-family: 'Segoe UI', sans-serif;
+}
+
+.new-reminder {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-overlay);
+    font-family: var(--font-family);
+}
+
+.new-reminder-outer {
+    background-color: #fff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    width: 100%;
+    max-width: 600px;
+    overflow: hidden;
+}
+
+.new-reminder-header {
+    text-align: center;
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: var(--spacing);
+}
+
+.new-reminder-inner {
+    padding: var(--spacing);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing);
+}
+
+.new-reminder-inner input,
+.new-reminder-inner textarea {
+    padding: 12px;
+    border: 1px solid var(--input-border);
+    border-radius: var(--border-radius);
+    font-size: 16px;
+    color: var(--text-color);
+}
+
+.new-reminder-inner label {
+    margin-bottom: 4px;
+    display: inline-block;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.new-reminder-description {
+    width: 100%;
+}
+
+.new-reminder-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-weight: 500;
+}
+
+button[type="submit"] {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+button[type="submit"]:hover {
+    background-color: #1f6391;
+}
+
+button[type="button"] {
+    background-color: #ccc;
+    color: #333;
+}
+
+button[type="button"]:hover {
+    background-color: #bbb;
+}
+
+.close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    color: #fff;
+    cursor: pointer;
+}
