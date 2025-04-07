@@ -66,13 +66,6 @@ input:focus{
     text-decoration: line-through;
 }
 
-/* body{
-    font-family: 'Roboto', sans-serif;
-    background: #70e1f5;
-    background: -webkit-linear-gradient(to right, #ffd194, #70e1f5);
-    background: linear-gradient(to right, #ffd194, #70e1f5);
-} */
-
 .complete-button {
   background-color: #2980b9;
   color: white;
@@ -85,8 +78,8 @@ input:focus{
 }
 
 .reminder-container {
-    width: 100%; /* Make reminder section take full width */
-    height: 600px; /* Allow height to adjust based on content */
+    width: 100%; 
+    height: 600px; 
     color: white;
     position: relative;
     display: flex;
@@ -95,11 +88,6 @@ input:focus{
 
 .complete-button:hover {
   background-color: #1c6f94;
-}
-
-/* complete tasks */
-.completed-task-section{
-
 }
 
 .completed-tasks {
