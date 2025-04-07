@@ -9,7 +9,6 @@ const RemindersList = () => {
     const [error, setError] = useState(null);
     const [collapse, setCollapse] = useState(true);
     const [showNewReminder, setShowNewReminder] = useState(false);
-    
     const fetchReminders = async () => {
         try {
             const response = await fetch('/api/reminders');
@@ -88,10 +87,9 @@ const RemindersList = () => {
     }
 
     return (
-        <div>
-            <div>
-                <h2>Reminders <span className='add-reminder' onClick={newReminder}>+</span></h2>
-            </div>
+        <div className='reminder-container'>
+            <div className={showNewReminder ? 'overlay show' : 'overlay'}></div>
+            <h2>Reminders <span className='add-reminder' onClick={newReminder}>+</span></h2>
             {showNewReminder && (
                 <NewReminder 
                     onClose = {onClose}
@@ -115,23 +113,25 @@ const RemindersList = () => {
                         ))}
                 </ul>
             </div>
-            <h3 className="completed-task-header" onClick={() => setCollapse(!collapse)}>Completed Tasks</h3>
-            <div className={collapse ? "completed-tasks" : "completed-tasks active"} >
-                <ul>
-                    {reminders
-                        .filter(reminder => reminder.status === 'completed')
-                        .map(reminder => (
-                            <li
-                                key={reminder.reminderId}
-                                className={reminder.status === 'completed' ? 'completed' : ''}
-                            >
-                                <Reminder
-                                    reminder={reminder}
-                                    handleComplete={handleComplete}
-                                />
-                            </li>
-                        ))}
-                </ul>
+            <div className='completed-task-section'>
+                <h3 className="completed-task-header" onClick={() => setCollapse(!collapse)}>Completed Tasks</h3>
+                <div className={collapse ? "completed-tasks" : "completed-tasks active"} >
+                    <ul>
+                        {reminders
+                            .filter(reminder => reminder.status === 'completed')
+                            .map(reminder => (
+                                <li
+                                    key={reminder.reminderId}
+                                    className={reminder.status === 'completed' ? 'completed' : ''}
+                                >
+                                    <Reminder
+                                        reminder={reminder}
+                                        handleComplete={handleComplete}
+                                    />
+                                </li>
+                            ))}
+                    </ul>
+                </div>
             </div>
         </div>
     );

@@ -8,6 +8,7 @@
   margin: auto;
   background-color: black;
   padding: 20px;
+  box-sizing: border-box;
 }
 
 .top-row {
@@ -15,6 +16,11 @@
   justify-content: space-between;
   width: 100%; /* Make it take the full width */
   margin-bottom: 20px; /* Add space between rows */
+}
+
+.mid-row {
+  flex: 1;
+  width:100%;
 }
 
 .weather-container {
@@ -27,9 +33,4 @@
   height: 250px;
 }
 
-.reminder-container {
-  width: 100%; /* Make reminder section take full width */
-  height: 600px; /* Allow height to adjust based on content */
-  color: white;
-  overflow-y: scroll;
-}
+

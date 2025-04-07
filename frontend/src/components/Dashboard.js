@@ -15,7 +15,7 @@ const Dashboard = () => {
                     <WeeklyCalendar />
                 </div>
             </div>
-            <div className="reminder-container">
+            <div className="mid-row">
                 <RemindersList />
             </div>
         </div>
