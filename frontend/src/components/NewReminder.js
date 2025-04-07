@@ -5,15 +5,17 @@ const NewReminder = ({ onClose, onSubmit }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
-  const [overlay, setOverlay] = useState("");
+  const [time, setTime] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    const submittedTime = time || "23:59"
+
     const reminder = {
       title: title,
       createdBy: "System",
-      reminderTime: date,
+      reminderTime: [date, submittedTime].join(" "),
       description: description,
       createdAt: new Date().toLocaleString(),
       updatedAt: new Date().toLocaleString(),
@@ -47,14 +49,17 @@ const NewReminder = ({ onClose, onSubmit }) => {
             rows="4"
           ></textarea>
 
-          <div>
-            <label>Due Date</label>
+          <div className="new-reminder-date">
             <input
               type="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
               required
             />
+            <input
+                type="time"
+                onChange={(e) => setTime(e.target.value)}
+            ></input>
           </div>
 
           <div className="new-reminder-buttons">
