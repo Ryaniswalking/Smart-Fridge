@@ -19,8 +19,8 @@
 }
 
 .mid-row {
-  flex: 1;
-  width:100%;
+  align-self: baseline;
+  width:50%;
 }
 
 .weather-container {
