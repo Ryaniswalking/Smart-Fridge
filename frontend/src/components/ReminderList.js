@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../styles/reminders.css";
+import "../styles/reminderList.css";
 import Reminder from "./Reminder";
 import NewReminder from "./NewReminder";
 
@@ -101,7 +101,7 @@ const RemindersList = () => {
             .map((reminder) => (
               <li
                 key={reminder.reminderId}
-                className={reminder.status === "completed" ? "completed" : ""}
+                className={reminder.status.toString()}
               >
                 <Reminder reminder={reminder} handleComplete={handleComplete} />
               </li>
@@ -125,7 +125,7 @@ const RemindersList = () => {
                 <li
                   key={reminder.reminderId}
                   className={reminder.status === "completed" ? "completed" : ""}
-                >
+               >
                   <Reminder
                     reminder={reminder}
                     handleComplete={handleComplete}
