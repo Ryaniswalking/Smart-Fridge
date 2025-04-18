@@ -22,7 +22,6 @@ function checkRemindersPassedDue(reminders){
 
 async function getAllReminders(){
   try{
-    console.log("get all reminders called!!")
     const results = await getReminders();
     const parsed = parseReminder(results);
     const reminders = checkRemindersPassedDue(parsed);

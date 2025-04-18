@@ -7,7 +7,6 @@ const router = express.Router()
 router.get('/', async (req, res) => {
     try{
         const reminders = await getAllReminders();
-        console.log("reminders!", reminders);
         res.json(reminders)
     } catch (err) {
         console.error('Error fetching reminders:', err);
