@@ -26,7 +26,7 @@ const RemindersList = () => {
   // Fetch reminders from the API
   useEffect(() => {
     fetchReminders();
-  }, [reminders]);
+  }, []);
 
   if (loading) {
     return <div>Loading reminders...</div>;
@@ -77,8 +77,8 @@ const RemindersList = () => {
         },
         body: JSON.stringify(reminder),
       });
-      console.log(response.ok);
       setShowNewReminder(false);
+      fetchReminders();
     } catch (err) {
       console.error(err.message);
     }
@@ -125,7 +125,7 @@ const RemindersList = () => {
                 <li
                   key={reminder.reminderId}
                   className={reminder.status === "completed" ? "completed" : ""}
-               >
+                >
                   <Reminder
                     reminder={reminder}
                     handleComplete={handleComplete}
