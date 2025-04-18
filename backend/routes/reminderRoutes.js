@@ -1,14 +1,13 @@
 const express = require('express');
 const { getReminders, saveReminder, updateReminder} = require('../queries/queries')
-const { parseReminder } = require('../models/reminder');
 const { RestartProcess } = require('concurrently');
-
+const { getAllReminders } = require("../controllers/ReminderController");
 const router = express.Router()
 
 router.get('/', async (req, res) => {
     try{
-        const results = await getReminders();
-        const reminders = parseReminder(results);
+        const reminders = await getAllReminders();
+        console.log("reminders!", reminders);
         res.json(reminders)
     } catch (err) {
         console.error('Error fetching reminders:', err);

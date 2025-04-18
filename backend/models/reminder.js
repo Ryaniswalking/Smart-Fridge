@@ -26,22 +26,9 @@ class Reminder {
   }
 }
 
-const isPastDue = (reminderTime) => {
-  console.log("reminder time:", reminderTime);
-  if (!reminderTime) return false;
-
-  console.log(reminderTime);
-  const dueDate = new Date(reminderTime);
-  const now = new Date();
-
-  return now > dueDate;
-};
-
 function parseReminder(rawData) {
-  // Check if rawData is an array
   if (Array.isArray(rawData)) {
     return rawData.map((data) => {
-      const status = isPastDue(data.reminder_time) ? "passed" : data.status;
       return new Reminder(
         data.reminder_id,
         data.created_by,
@@ -50,15 +37,13 @@ function parseReminder(rawData) {
         data.reminder_time,
         data.created_at,
         data.updated_at,
-        status,
+        data.status,
         data.is_recurring,
         data.frequency,
         data.recurrence_end
       );
     });
   } else {
-    // For single object, compute status once
-    const status = isPastDue(rawData.reminder_time) ? "passed" : rawData.status;
     return new Reminder(
       rawData.reminder_id,
       rawData.created_by,
@@ -67,7 +52,7 @@ function parseReminder(rawData) {
       rawData.reminder_time,
       rawData.created_at,
       rawData.updated_at,
-      status,
+      rawData.status,
       rawData.is_recurring,
       rawData.frequency,
       rawData.recurrence_end
