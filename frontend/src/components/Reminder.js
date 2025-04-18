@@ -1,17 +1,19 @@
 import React from "react";
-import "../styles/reminders.css";
+import "../styles/reminder.css";
+import lateImgage from "../assets/reminder-icons/late.png";
 
 function Reminder({ reminder, handleComplete }) {
   return (
-    <div>
-      <div>
-        <strong>{reminder.title}</strong>
-      </div>
-      <div>{reminder.description}</div>
-      <div>
+    <div className="reminder">
+      <div id="reminder-created-by">{reminder.createdBy}</div>
+      {reminder.status == "passed" && (
+        <img id="reminder-late-icon" src={lateImgage} />
+      )}
+      <div id="reminder-title">{reminder.title}</div>
+      <div id="reminder-description">{reminder.description}</div>
+      <div id="reminder-due-date">
         <em>{new Date(reminder.reminderTime).toLocaleString()}</em>
       </div>
-      <div>Created By: {reminder.createdBy}</div>
       {reminder.isRecurring && (
         <div>
           Recurring: {reminder.frequency} until{" "}
