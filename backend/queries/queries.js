@@ -60,4 +60,51 @@ const updateReminder = async (reminder) => {
   }
 }
 
-module.exports = { getReminders, saveReminder, updateReminder };
+const getWeeklyCountsQuery = async () => {
+  try{ 
+    const query = `
+      select count(*) from reminders
+      where completed_at BETWEEN NOW() - INTERVAL '7 days' and NOW(); 
+    `
+    const result = await pool.query(query)
+    return result.rows[0];
+  } catch (err) {
+    throw err;
+  };
+}
+
+const getTotalCountQuery = async () => {
+  try{
+    const query = `
+      select count(*) from reminders
+      where completed_at is NOT NULL
+    `
+    const result = await pool.query(query)
+    return result.rows[0];
+  } catch (err){
+    throw err;
+  }
+}
+
+const getTodayCountQuery = async () => {
+  try{
+    const query = `
+    SELECT COUNT(*) FROM reminders
+    WHERE completed_at >= CURRENT_DATE
+    AND completed_at < CURRENT_DATE + INTERVAL '1 day';
+    `
+    const result = await pool.query(query);
+    return result.rows[0]
+  } catch (err) {
+    throw new Error(`Could not query db for today's counts: ${err}`)
+  }
+};
+
+module.exports = { 
+  getReminders, 
+  saveReminder, 
+  updateReminder,
+  getWeeklyCountsQuery, 
+  getTotalCountQuery,
+  getTodayCountQuery
+} 
