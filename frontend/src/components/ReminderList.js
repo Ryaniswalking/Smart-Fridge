@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../styles/reminderList.css";
 import Reminder from "./Reminder";
 import NewReminder from "./NewReminder";
+import ReminderCount from "./ReminderCounts";
 
 const RemindersList = () => {
   const [reminders, setReminders] = useState([]);
@@ -9,6 +10,7 @@ const RemindersList = () => {
   const [error, setError] = useState(null);
   const [collapse, setCollapse] = useState(true);
   const [showNewReminder, setShowNewReminder] = useState(false);
+  const [refreshCounts, setRefreshCounts] = useState(false);
   const fetchReminders = async () => {
     try {
       const response = await fetch("/api/reminders");
@@ -54,6 +56,7 @@ const RemindersList = () => {
 
       if (response.ok) {
         fetchReminders();
+        setRefreshCounts((prev) => !prev);
       }
     } catch (err) {
       console.log(err);
@@ -70,7 +73,7 @@ const RemindersList = () => {
 
   const onSubmit = async (reminder) => {
     try {
-      const response = await fetch("/api/reminders/add-reminder", {
+      await fetch("/api/reminders/add-reminder", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -89,8 +92,11 @@ const RemindersList = () => {
       <div className={showNewReminder ? "overlay show" : "overlay"}></div>
       <h2>
         Reminders{" "}
-        <span className="add-reminder" onClick={newReminder}>
-          +
+        <span className="reminder-count">
+          <span className="add-reminder" onClick={newReminder}>
+            +
+          </span>
+          <ReminderCount refreshTrigger={refreshCounts}/>
         </span>
       </h2>
       {showNewReminder && <NewReminder onClose={onClose} onSubmit={onSubmit} />}
