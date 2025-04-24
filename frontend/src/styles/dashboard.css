@@ -4,11 +4,11 @@
   justify-content: flex-start; /* Align items to the top */
   align-items: center; /* Center items horizontally */
   width: 1020px;
-  height: 1000px;
   margin: auto;
   background-color: black;
   padding: 20px;
   box-sizing: border-box;
+  position: relative;
 }
 
 .top-row {
@@ -21,6 +21,7 @@
 .mid-row {
   align-self: baseline;
   width:50%;
+  height: 680px;
 }
 
 .weather-container {
