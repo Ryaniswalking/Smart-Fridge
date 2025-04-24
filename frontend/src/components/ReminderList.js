@@ -127,6 +127,7 @@ const RemindersList = () => {
           <ul>
             {reminders
               .filter((reminder) => reminder.status === "completed")
+              .reverse()
               .map((reminder) => (
                 <li
                   key={reminder.reminderId}
