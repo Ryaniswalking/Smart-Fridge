@@ -107,3 +107,9 @@ input:focus {
 .new-reminder.show {
     display: block;
 }
+
+.reminder-counts{
+    display: inline;
+    margin-right: 20px;
+    float: inline-end;
+}
