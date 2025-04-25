@@ -11,11 +11,23 @@
   position: relative;
 }
 
+.digital-frame{
+  height: 500px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.digital-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; 
+}
+
 .top-row {
-  display: flex; /* Align weather and calendar side by side */
+  display: flex; 
   justify-content: space-between;
-  width: 100%; /* Make it take the full width */
-  margin-bottom: 20px; /* Add space between rows */
+  width: 100%; 
+  margin-bottom: 20px; 
 }
 
 .mid-row {
@@ -26,11 +38,11 @@
 
 .weather-container {
   width: 250px;
-  height: 250px; /* Adjust width */
+  height: 250px; 
 }
 
 .calendar-container {
-  flex-grow: 1; /* Allow calendar to take the remaining space */
+  flex-grow: 1; 
   height: 250px;
 }
 
