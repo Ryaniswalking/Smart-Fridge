@@ -6,21 +6,45 @@
   width: 1020px;
   margin: auto;
   background-color: black;
-  padding: 20px;
   box-sizing: border-box;
   position: relative;
 }
 
-.digital-frame{
-  height: 500px;
+.digital-frame {
+  height: 765px;
   width: 100%;
   overflow: hidden;
+}
+
+.vertical-pair {
+  height: 765px;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row; /* stack vertically */
+  padding: 0;
+  margin: 0;
+  gap: 0; /* no space between images */
+}
+
+.vertical-pair img {
+  height: 50%; /* each takes half the container height */
+  width: 100%; /* stretch to container width */
+  display: block;
+}
+
+img {
+  object-fit: cover;
 }
 
 .digital-frame img {
   width: 100%;
   height: 100%;
-  object-fit: contain; 
+}
+
+.vertical-pair img {
+  width: 100%;
+  height: 100%;
 }
 
 .top-row {
